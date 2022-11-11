@@ -1,0 +1,24 @@
+<nav>
+  <div class="nav-center">
+    <!-- nav header -->
+    <div class="nav-header">
+      <div class="logo" routerLink="home"></div>
+      <button 
+        class="nav-toggle" 
+        (click)="navToggle()">
+      </button>
+    </div>
+    <!-- links -->
+    <ul class="links">
+      <li>
+        <a routerLink="home" (click)="linkToggle()">Forecast</a>
+      </li>
+      <li>
+        <a routerLink="chart" (click)="linkToggle()">Chart</a>
+      </li>
+      <li>
+        <a routerLink="calc" (click)="linkToggle()">Heat Index</a>
+      </li>
+    </ul>
+  </div>
+</nav>
