@@ -1,35 +1,50 @@
 <div class="Container">
-
-  <form [formGroup]="profileForm" action="">
-    <mat-form-field appearance="fill">
-      <select 
-      matNativeControl 
-      required
-      formControlName="degree">
-        <option id="celsius" value="celsius">Celsius</option>
-        <option id="fahrenheit" value="fahrenheit">Fahrenheit</option>
-      </select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>degree</mat-label>
-      <input 
-      matInput 
-      type="number" 
-      placeholder="Simple placeholder"
-      required
-      formControlName="degreeValue">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>humidity</mat-label>
-      <input 
-      matInput 
-      type="number" 
-      placeholder="Simple placeholder"
-      required
-      formControlName="humidity">
-    </mat-form-field>
-    <button type="submit" class="submit" (click)="event()">ahoj</button>
-  </form>
-  
-
+  <div class="formContainer">
+    <form [formGroup]="profileForm">
+      <!-- input for degree selection -->
+      <div class="InputGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Select</mat-label>
+          <mat-select
+          formControlName="degree">
+            <mat-option value="celsius">Celsius</mat-option>
+            <mat-option value="fahrenheit">Fahrenheit</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- input for degree value -->
+        <mat-form-field appearance="fill">
+          <mat-label>Degree</mat-label>
+          <input 
+          matInput 
+          type="number" 
+          placeholder="Outside Temperature"
+          required
+          formControlName="temperature">
+        </mat-form-field>
+        <!-- input for humidity -->
+        <mat-form-field appearance="fill">
+          <mat-label>Humidity</mat-label>
+          <input 
+          matInput 
+          type="number" 
+          placeholder="Relative Humidity in %"
+          required
+          min="0"
+          max="100"
+          formControlName="humidity">
+        </mat-form-field>
+        <!-- submit -->
+        <button type="submit" class="submit" (click)="event()">Submit</button>
+      </div>
+    </form>
+    <!-- form output -->
+    <div id="outputTemperature"><span>Heat Index:</span><p>{{ result }}</p></div>
+  </div>
+  <!-- local storrage output -->
+  <div class="localStorrage" *ngIf="localStorrageArray">
+    <h3>Search History</h3>
+    <div class="storageItems" *ngFor="let storage of localStorrageArray">
+      <p>{{ storage }}</p>
+    </div>
+  </div>
 </div>

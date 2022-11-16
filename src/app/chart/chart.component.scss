@@ -1,5 +1,8 @@
 .homeContainer {
-  background: rgb(199, 193, 193);
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
+}
+mat-tab-group {
+  margin: 50px auto;
+  max-width: 900px;
 }

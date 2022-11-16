@@ -19,6 +19,6 @@ export class ForecastService {
     API for  weather history
   */
   fetchDataHistory():Observable<forecastData> {
-    return this.http.get<forecastData>('https://api.open-meteo.com/v1/forecast?latitude=51.5002&longitude=-0.1262&hourly=temperature_2m,relativehumidity_2m,weathercode,surface_pressure,windspeed_10m&past_days=14')
+    return this.http.get<forecastData>('https://api.open-meteo.com/v1/forecast?latitude=51.5002&longitude=-0.1262&hourly=temperature_2m,relativehumidity_2m,weathercode,surface_pressure,windspeed_10m&past_days=7')
   }
 }

@@ -1,4 +1,44 @@
-<div>
-  
-  ahoj :)
+<div class="presentContainer" *ngIf="actualWeather">
+  <div class="contentData">
+    <div class="upperData" >
+      <div class="location">London</div>
+      <div class="time">{{ actualWeather[0].time }}</div>
+    </div>
+    <div class="lowerData">
+      <div class="line">
+        <div class="temeperature">
+          <img src="assets/weatherTableHead/temperature.png" alt="temperature">
+          <p>{{ actualWeather[0].temperature_2m }} °C</p>
+        </div>
+        <div class="windspeed">
+          <img src="assets/weatherTableHead/windspeed.png" alt="windspeed">
+          <p>{{ actualWeather[0].windspeed_10m }} km/h</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="relativeHumidity">
+          <img src="assets/weatherTableHead/humidity.png" alt="humidity">
+          <p>{{ actualWeather[0].relativehumidity_2m }}%</p>
+        </div>
+        <div class="pressure">
+          <img src="assets/weatherTableHead/pressure.png" alt="pressure">
+          <p>{{ actualWeather[0].surface_pressure }} hPa</p>
+        </div>  
+      </div>
+    </div>
+  </div>
+  <div class="weatherState" [ngSwitch]="actualWeather[0].weathercode">
+    <img *ngSwitchCase="1" src="assets/weatherPresent/clear.png" alt="Clear">
+    <img *ngSwitchCase="2" src="assets/weatherPresent/mostly-clear.png" alt="Mostly clear">
+    <img *ngSwitchCase="3" src="assets/weatherPresent/fog.png" alt="Fog">
+    <img *ngSwitchCase="4" src="assets/weatherPresent/drizzle.png" alt="Drizzle">
+    <img *ngSwitchCase="5" src="assets/weatherPresent/rain.png" alt="Rain">
+    <img *ngSwitchCase="6" src="assets/weatherPresent/freezing-rain.png" alt="Freezing rain">
+    <img *ngSwitchCase="7" src="assets/weatherPresent/snow-fall.png" alt="Snowfall">
+    <img *ngSwitchCase="8" src="assets/weatherPresent/snow-grains.png" alt="Snow grains">
+    <img *ngSwitchCase="9" src="assets/weatherPresent/rain-shower.png" alt="Rain shower">
+    <img *ngSwitchCase="10" src="assets/weatherPresent/snow-shower.png" alt="Snow shower">
+    <img *ngSwitchCase="11" src="assets/weatherPresent/thunder-slight.png" alt="Slight storm">
+    <img *ngSwitchCase="12" src="assets/weatherPresent/thunderstorm.png" alt="Thunderstorm">
+  </div>
 </div>

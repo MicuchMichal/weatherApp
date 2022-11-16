@@ -10,6 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+/*
+    services
+*/ 
+import { ForecastService } from './services/forecast.service';
+import { serviceHandeling } from './services/service-handeling';
 /*
     all components in application
 */ 
@@ -18,20 +26,14 @@ import { FooterComponent } from './footer/footer.component';
 //homepage
 import { HomePageComponent } from './home-page/home-page.component';
 import { PresentComponent } from './home-page/present/present.component';
-import { HistoryComponent } from './home-page/history/history.component';
-import { FutureComponent } from './home-page/future/future.component';
+import { FutureTableComponent } from './home-page/future-table/future-table.component';
+import { HistoryTableComponent } from './home-page/history-table/history-table.component';
 //charts
 import { ChartComponent } from './chart/chart.component';
 import { HistoryChartComponent } from './chart/history-chart/history-chart.component';
 import { FutureChartComponent } from './chart/future-chart/future-chart.component';
 //calculator
 import { CalcComponent } from './calc/calc.component';
-/*
-    services
-*/ 
-import { ForecastService } from './services/forecast.service';
-import { chartHandeling } from './services/chart-handeling';
-import { serviceHandeling } from './services/service-handeling';
 
 @NgModule({
   declarations: [
@@ -41,11 +43,11 @@ import { serviceHandeling } from './services/service-handeling';
     ChartComponent,
     CalcComponent,
     FooterComponent,
-    HistoryComponent,
-    FutureComponent,
     PresentComponent,
     HistoryChartComponent,
     FutureChartComponent,
+    FutureTableComponent,
+    HistoryTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +59,12 @@ import { serviceHandeling } from './services/service-handeling';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
-  providers: [ForecastService, serviceHandeling, chartHandeling],
+  providers: [ForecastService, serviceHandeling],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

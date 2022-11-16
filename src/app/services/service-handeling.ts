@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ForecastService } from './forecast.service'
 import { HourlyData } from 'src/app/models/forecastModel';
-
+import { Chart, registerables } from 'chart.js';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,6 +10,13 @@ export class serviceHandeling {
 
   hourlyData?: HourlyData [] = [];
   hourlyDataHistory?: HourlyData [] = [];
+  actualWeather?: HourlyData [] = [];
+  
+  timeFuture: string [] = [];
+  temperatureFuture: number [] = [];
+
+  timeHistory: string [] = [];
+  temperatureHistory: number [] =[];
 
   constructor( private http: ForecastService ) { 
     this.fetchData();
@@ -22,7 +29,7 @@ export class serviceHandeling {
     this.http.fetchData()
     .subscribe({
       next: (response) => {
-        this.toWeatherDataArray(response, 72, this.hourlyData);
+        this.toWeatherDataArray(response, 72, this.hourlyData, this.timeFuture, this.temperatureFuture);
       }
     });
     return this.hourlyData;
@@ -31,7 +38,8 @@ export class serviceHandeling {
     this.http.fetchDataHistory()
     .subscribe({
       next: (response) => {
-        this.toWeatherDataArray(response, 100, this.hourlyDataHistory)
+        this.toWeatherDataArray(response, 168, this.hourlyDataHistory, this.timeHistory, this.temperatureHistory);
+        this.hourlyDataHistory.reverse();
       }
     });
     return this.hourlyDataHistory;
@@ -39,8 +47,8 @@ export class serviceHandeling {
   /*  
     transforming fetched data to interface HourlyData
   */
-  toWeatherDataArray(response, index: number, data: HourlyData[]){
-    for (let i = 0; i < index; i ++){
+  toWeatherDataArray(response, index: number, data: HourlyData[], time, temperature){
+    for (let i = 0; i < index; i++){
       let temp: HourlyData;
       temp = {
         time: response.hourly.time[i],
@@ -50,10 +58,49 @@ export class serviceHandeling {
         surface_pressure: response.hourly.surface_pressure[i],
         windspeed_10m: response.hourly.windspeed_10m[i]
       }
-        temp.weathercode = this.transferWeatherCode(temp.weathercode);
-        data.push(temp);
-     }
+      temp.weathercode = this.transferWeatherCode(temp.weathercode);
+      temp.time = this.transferTime(temp.time);
+      /*  
+        getting actual weather data
+      */  
+      let actualHour = parseInt(temp.time.substring(8,10)); 
+      let actualDay = parseInt(temp.time.substring(0,2));
+      let date = new Date();
+      if ((actualDay == date.getDate()) && (actualHour == date.getHours())){
+        this.actualWeather.push(temp);
+      }
+      time.push(temp.time);
+      temperature.push(temp.temperature_2m);
+      data.push(temp);
+    }
      return data;
+  }
+  /*  
+    charts
+  */
+  displayChart(time, temperature, name){
+    let chart = new Chart(name, {
+      type: 'line', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: time, 
+        datasets: [
+          {
+            label: "Temperature",
+            data: temperature,// values on Y-Axis
+            backgroundColor: 'rgba(40, 75, 99, 0.5)',
+            borderColor: "rgb(21, 50, 67)",
+            fill: true,
+            hoverBorderColor: 'black',
+            pointBackgroundColor: 'red',
+          }, 
+        ]
+      },
+      options: {
+        aspectRatio:1.5,
+      },
+    });
+    return chart
   }
   /*  
     weatherCode transforming for images in html
@@ -126,5 +173,29 @@ export class serviceHandeling {
       default: weatherCode = 0;
     }
     return weatherCode;
+  }
+/*  
+  time transforming for html 
+*/
+  transferTime (time):string {
+    const months = {
+      0: "Jan",
+      1: "Feb",
+      2: "Mar",
+      3: "Apr",
+      4: "May",
+      5: "Jun",
+      6: "Jul",
+      7: "Aug",
+      8: "Sept",
+      9: "Oct",
+      10: "Nov",
+      11: "Dec",
+    }
+    let outputMonth = time.substring(5,7);outputMonth = months[outputMonth-1];
+    let outputDay = time.substring(8,10);
+    let outputHour = time.substring(11);
+
+    return `${outputDay}. ${outputMonth} ${outputHour}`;
   }
 }

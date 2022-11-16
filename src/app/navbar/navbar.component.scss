@@ -1,12 +1,13 @@
 nav {
   box-shadow: 0 -3px 15px 0px black;
   z-index: 999;
+  background: #153243;
 }
 .nav-center {
-  width: 100%;
+  position: relative;
   .nav-header {
-    position: relative;
     height: 70px;
+    position: relative;
   }
   .logo {
     width: 50px;
@@ -51,7 +52,7 @@ nav {
         text-decoration: none;
         letter-spacing: 0.2em;
         font-size: 1.2em;
-        color: black;
+        color: #EEF0EB;
         transition: all 0.55s;
         &:hover {
           transform: translate(15px);

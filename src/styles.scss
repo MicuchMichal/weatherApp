@@ -1,18 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { 
+:root {
+  $color-primary-1: #EEF0EB;
+  $color-primary-2: #F4F9E9;
+  $color-primary-3: #284B63; 
+  $color-primary-4: #153243;
+  $color-primary-5: #B4B8AB;
+}
+html { 
   min-height: 100vh; 
+  height: 100%;
+  
+}
+body {
+  min-height: 100vh; 
+  height: 100%;
+  background-color: #EEF0EB;
 }
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-body { 
-  margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
+table {
+  margin: auto;
+  padding-top: 130px;
+  width: 100%;
+  .mat-cell {
+    text-align: center;
+    justify-content:center;
+  }
+  img {
+    width: 40px;
+    height: auto;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+  th.mat-header-cell {
+    text-align: center !important;
+  }
+  .mat-sort-header-container {
+    justify-content: center !important;
+  }
 }
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.chartContainer {
+  max-width: 940px;
+  margin-top: 50px;
+  min-width: 660px;
+  canvas{
+    background: #F4F9E9;
+  }
+}

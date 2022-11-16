@@ -1,11 +1,12 @@
 .footerContainer {
-  background: rgb(192, 173, 173);
+  background: #153243;
   width: 100%;
+  position: relative;
   bottom: 0px;
   text-align: center;
   padding: 20px 0;
   p {
-    background: rgb(182, 78, 78);
+    color: white;
     width: fit-content;
     margin: auto;
   }

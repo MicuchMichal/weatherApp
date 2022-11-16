@@ -28,11 +28,17 @@ export interface Hourly {
 }
 
 //actual data of diplayed weather forecast data
-export interface HourlyData  {
-  time: string,
-  temperature_2m: number,
+export interface HourlyData {
   relativehumidity_2m: number,
-  weathercode: number,
   surface_pressure: number,
+  temperature_2m: number,
+  time: string,
+  weathercode: number,
   windspeed_10m: number
+}
+//template for local storage 
+export interface localStorageData {
+  temperature: string,
+  humidity: string
+  result: string,
 }

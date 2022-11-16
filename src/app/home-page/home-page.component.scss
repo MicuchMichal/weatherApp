@@ -1,13 +1,13 @@
-.homeContainer {
-  background: rgb(199, 193, 193);
-  width: 100%;
-  min-height: 100vh;
+.homePage {
+  background: #EEF0EB;
+  min-height: 100%;
 }
 // bug fixing line - 
 :host ::ng-deep .mat-ripple-element {
   position: absolute;
 }
 mat-tab-group {
-  margin: auto;
-  max-width: 1200px;
+  margin: 50px auto;
+  max-width: 900px;
 }
+

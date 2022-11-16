@@ -1,0 +1,82 @@
+<!-- searching bar -->
+<mat-form-field appearance="standard" class="searchTable">
+  <mat-label>Filter Table</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource">
+    <!-- time Column -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">{{row.time}}</td>
+    </ng-container>
+
+    <!-- temperature Column -->
+    <ng-container matColumnDef="temperature_2m">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <img src="assets/weatherTableHead/temperature.png" alt="temperature">
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.temperature_2m }} °C</td>
+    </ng-container>
+
+    <!-- humidity Column -->
+    <ng-container matColumnDef="relativehumidity_2m">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <img src="assets/weatherTableHead/humidity.png" alt="humidity">
+      </th>
+      <td mat-cell *matCellDef="let row">{{row.relativehumidity_2m}} %</td>
+    </ng-container>
+
+    <!-- weather code Column -->
+    <ng-container matColumnDef="weathercode">
+      <th mat-header-cell *matHeaderCellDef>
+        <img src="assets/weatherTableHead/weather.png" alt="weather">
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <div [ngSwitch]="row.weathercode">
+          <img *ngSwitchCase="0" src="assets/missing-data.png" alt="Missing data">
+          <img *ngSwitchCase="1" src="assets/clear.png" alt="Clear">
+          <img *ngSwitchCase="2" src="assets/mostly-clear.png" alt="Mostly clear">
+          <img *ngSwitchCase="3" src="assets/fog.png" alt="Fog">
+          <img *ngSwitchCase="4" src="assets/drizzle.png" alt="Drizzle">
+          <img *ngSwitchCase="5" src="assets/rain.png" alt="Rain">
+          <img *ngSwitchCase="6" src="assets/freezing-rain.png" alt="Freezing rain">
+          <img *ngSwitchCase="7" src="assets/snow-fall.png" alt="Snowfall">
+          <img *ngSwitchCase="8" src="assets/snow-grains.png" alt="Snow grains">
+          <img *ngSwitchCase="9" src="assets/rain-shower.png" alt="Rain shower">
+          <img *ngSwitchCase="10" src="assets/snow-shower.png" alt="Snow shower">
+          <img *ngSwitchCase="11" src="assets/thunder-slight.png" alt="Slight storm">
+          <img *ngSwitchCase="12" src="assets/thunderstorm.png" alt="Thunderstorm">
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- pressure Column -->
+    <ng-container matColumnDef="surface_pressure">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <img src="assets/weatherTableHead/pressure.png" alt="pressure">
+      </th>
+      <td mat-cell *matCellDef="let row">{{row.surface_pressure}} hPa</td>
+    </ng-container>
+
+    <!-- windspeed Column -->
+    <ng-container matColumnDef="windspeed_10m">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <img src="assets/weatherTableHead/windspeed.png" alt="windspeed">
+      </th>
+      <td mat-cell *matCellDef="let row">{{row.windspeed_10m}} km/h</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="24"
+      [pageSizeOptions]="[12, 24, 48, 72]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>

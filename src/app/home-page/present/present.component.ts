@@ -9,12 +9,11 @@ import { serviceHandeling } from 'src/app/services/service-handeling';
 })
 export class PresentComponent implements OnInit {
 
-  hourlyData?: HourlyData [];
-  
-  constructor( private data: serviceHandeling ) { }
+  actualWeather?: HourlyData[];
 
-  ngOnInit(): void {
+  constructor( private data: serviceHandeling ) {
+    this.actualWeather = this.data.actualWeather;
+  }
+  ngOnInit(): void {}
     
   }
-  
-}

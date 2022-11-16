@@ -1,10 +1,15 @@
 <div class="homeContainer">
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="future">
+      <!-- future chart component -->
       <app-future-chart></app-future-chart>
     </mat-tab>
     <mat-tab label="History">
-      <app-history-chart></app-history-chart>
+      <ng-template matTabContent>
+        <!-- history chart component -->
+        <app-history-chart></app-history-chart>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>
+
